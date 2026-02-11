@@ -1,10 +1,7 @@
 package org.example.alchimia.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -73,8 +70,9 @@ public class Medico {
     @Column(name = "Unimed")
     private String unimed;
 
-    @Column(name = "Especialidade")
-    private String especialidade;
+    @ManyToOne
+    @JoinColumn(name = "Especialidade", referencedColumnName = "Codigo")
+    private Especialidade especialidade;
 
     @Column(name = "Cpf")
     private String cpf;

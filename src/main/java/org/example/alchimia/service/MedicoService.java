@@ -2,7 +2,9 @@ package org.example.alchimia.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.alchimia.dto.Doctor;
+import org.example.alchimia.entity.Especialidade;
 import org.example.alchimia.entity.Medico;
+import org.example.alchimia.repository.EspecialidadeRepository;
 import org.example.alchimia.repository.MedicoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,7 @@ import java.util.List;
 public class MedicoService {
 
     private final MedicoRepository medicoRepository;
+    private final EspecialidadeRepository especialidadeRepository;
 
     public Medico findbyCRMMedico(int id){
         return medicoRepository.findMedicoByCrm(id);
@@ -26,8 +29,26 @@ public class MedicoService {
         return fillDoctor(listMedicos);
     }
 
-    public List<Doctor> findbyEspecialidadeMedico(String idEspecialidade){
-        List<Medico> listMedicos =  medicoRepository.findMedicoByEspecialidadeAndInativo(idEspecialidade, 0);
+    public List<Doctor> buscaTodosMedicoQueTrabalhamNoSetor(int idSetor) {
+
+        // Pega todas as especilidades que trabalham naquela setor
+        // Pega todos os medicos que tem aquela especilidade
+        List<Especialidade> especialidadeList = especialidadeRepository.findEspecialidadeBySetorId(idSetor);
+
+        List<Doctor> doctorList = new ArrayList<>();
+        for (Especialidade especialidade: especialidadeList){
+
+            doctorList.addAll(findbyEspecialidadeMedico(especialidade.getCodigo()));
+
+        }
+
+        return doctorList;
+
+
+    }
+
+    public List<Doctor> findbyEspecialidadeMedico(int idEspecialidade){
+        List<Medico> listMedicos =  medicoRepository.findMedicoByEspecialidadeCodigoAndInativo(idEspecialidade, 0);
         return fillDoctor(listMedicos);
     }
 
@@ -38,7 +59,7 @@ public class MedicoService {
             Doctor doctor = new Doctor();
             doctor.setName(medico.getNome());
             doctor.setCrmId(medico.getCrm());
-            doctor.setSpecialty(medico.getEspecialidade());
+            doctor.setSpecialty(medico.getEspecialidade().getCodigo());
 
             listFinal.add(doctor);
         }

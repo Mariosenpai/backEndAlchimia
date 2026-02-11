@@ -15,5 +15,5 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
 
     public List<Medico> findMedicoByInativo(int inativo);
 
-    List<Medico> findMedicoByEspecialidadeAndInativo(String especialidade, Integer inativo);
+    List<Medico> findMedicoByEspecialidadeCodigoAndInativo(Integer especialidade, Integer inativo);
 }
