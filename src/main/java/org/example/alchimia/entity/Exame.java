@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -97,12 +98,12 @@ public class Exame {
 
     private String olho;
 
-    private Boolean liberado;
+    private Integer liberado;
 
     private LocalDate horaTecnico;
     private LocalDate horaFimExame;
 
-    private Boolean cancelado;
+    private Integer cancelado;
 
     private String loteFechamento;
     private String usuarioRealizacao;
@@ -112,15 +113,15 @@ public class Exame {
 
     private String usuarioInclusao;
     private LocalDate dataInclusao;
-    private LocalDate horaInclusao;
+    private LocalDateTime horaInclusao;
 
-    private LocalDate horaExame;
+    private LocalDateTime horaExame;
 
     private LocalDate dataImpressao;
     private String usuarioImpressao;
 
-    private Boolean comprovanteImpresso;
-    private Boolean exameEncerrado;
-    private Boolean pendenciaGuia;
+    private Integer comprovanteImpresso;
+    private Integer exameEncerrado;
+    private Integer pendenciaGuia;
 
 }

@@ -7,6 +7,6 @@ public class Doctor {
 
     String crmId;
     String name;
-    Integer specialty;
+    String specialty;
 
 }

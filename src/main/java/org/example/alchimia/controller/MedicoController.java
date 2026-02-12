@@ -1,6 +1,7 @@
 package org.example.alchimia.controller;
 
 import lombok.AllArgsConstructor;
+import org.example.alchimia.dto.AppointmentStatus;
 import org.example.alchimia.dto.Doctor;
 import org.example.alchimia.entity.Medico;
 import org.example.alchimia.service.MedicoService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,6 +34,12 @@ public class MedicoController {
     @GetMapping("/especilidade/{id}")
     public ResponseEntity<List<Doctor>> buscaMedicosEspecilidadeAtivo(@RequestParam("id") int idEspecilidade){
         return new ResponseEntity<>(medicoService.findbyEspecialidadeMedico(idEspecilidade), HttpStatus.OK);
+    }
+
+    @GetMapping("/horariosOcupados")
+    public ResponseEntity<List<AppointmentStatus>> buscaHorariosOcupadoMedico(@RequestParam("crm") int idMedico,
+                                                                              @RequestParam("data") LocalDate date){
+        return new ResponseEntity<>(medicoService.horariosOcupadosMedico(date, idMedico), HttpStatus.OK);
     }
 
 }
