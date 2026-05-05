@@ -16,7 +16,7 @@ import java.time.ZoneOffset;
 public class TokenService {
 
     private final String chave = "nuba";
-    static private final int tempoTokenEmMinuto = 10;
+    static private final int tempoTokenEmMinuto = 60;
 
     public String gerarToken(Paciente paciente){
         return JWT.create()

@@ -43,15 +43,15 @@ public class PacienteService {
 
     }
 
-    public String gerarProximoCodigo() {
-        String ultimo = pacienteRepository.findMaxCodigo();
+    public Long gerarProximoCodigo() {
+        Long ultimo = Long.valueOf(pacienteRepository.findMaxCodigo());
 
         if (ultimo == null) {
-            return "1";
+            return 1L;
         }
 
-        int proximo = Integer.parseInt(ultimo) + 1;
-        return String.valueOf(proximo);
+        Long proximo = (long) (Integer.parseInt(String.valueOf(ultimo)) + 1);
+        return proximo;
     }
 
 }

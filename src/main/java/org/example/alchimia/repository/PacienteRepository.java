@@ -8,10 +8,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @EnableJpaRepositories
-public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
+public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     Paciente findByNome(String nome);
     Paciente findPatientByCpf(String CPF);
+
+    Paciente findByCodigo(Long codigo);
 
     @Query("SELECT MAX(p.codigo) FROM Paciente p")
     String findMaxCodigo();

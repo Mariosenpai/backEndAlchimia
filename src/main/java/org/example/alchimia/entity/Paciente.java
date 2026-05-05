@@ -24,7 +24,7 @@ public class Paciente implements UserDetails {
 
     @Id
     @Column(name = "Codigo")
-    private String codigo;
+    private Long codigo;
 
     private String senha;
 
